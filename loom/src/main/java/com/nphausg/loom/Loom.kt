@@ -26,8 +26,8 @@ sealed interface LoomState<out T> {
     data class Error(val throwable: Throwable? = null) : LoomState<Nothing>
 }
 
-internal const val DEBOUNCE = 200L // Adjustable debounce period
-internal const val THROTTLE = 1_000L // Adjustable throttle period
+internal const val DEBOUNCE = 0L // Adjustable debounce period
+internal const val THROTTLE = 0L // Adjustable throttle period
 
 fun <T> Flow<T>.streamLine(
     debounceTimeMillis: Long = DEBOUNCE,

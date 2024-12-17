@@ -115,7 +115,6 @@ internal class LoomImpl<T>(
         )
 
     override fun refresh(fromUser: Boolean) {
-        _state.subscriptionCount.value > 0
         _state.tryEmit(if (fromUser) LoomSignal.FromUser else LoomSignal.Automatic)
     }
 
