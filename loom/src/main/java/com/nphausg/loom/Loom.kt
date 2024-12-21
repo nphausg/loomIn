@@ -20,8 +20,8 @@ sealed interface LoomSignal {
 }
 
 sealed interface LoomState<out T> {
-    object Loading : LoomState<Nothing>
-    object Init : LoomState<Nothing>
+    data object Loading : LoomState<Nothing>
+    data object Init : LoomState<Nothing>
     data class Loaded<T>(val data: T) : LoomState<T>
     data class Error(val throwable: Throwable? = null) : LoomState<Nothing>
 }

@@ -16,9 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/nphausg/loomIn")
+        }
     }
 }
 
-rootProject.name = "android.loom"
+rootProject.name = "android.loomin"
 include(":app")
 include(":loom")

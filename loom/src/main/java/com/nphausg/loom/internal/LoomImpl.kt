@@ -34,7 +34,7 @@ import kotlinx.coroutines.sync.withLock
  *
  * ```kotlin
  *  private val refresher = loomIn(viewModelScope) { getData() }
- *  val uiState: StateFlow<UiState<String>> = refresher.state
+ *  val uiState: StateFlow<LoomState<String>> = refresher.state
  *  private suspend fun getData(): String {
  *         delay(1_000)
  *         return "Loom"

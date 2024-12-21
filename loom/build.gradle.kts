@@ -1,7 +1,15 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("maven-publish")
 }
+
+fun getLocalGroup() = "com.nphausg"
+fun getLocalVersion() = "0.0.1-alpha"
+fun getLocalArtifactId() = "loom"
+
+group = getLocalGroup()
+version = getLocalVersion()
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -9,15 +17,27 @@ java {
 }
 
 dependencies {
-    // Required -- JUnit 4 framework
-    testImplementation(libs.junit)
-    // Optional -- Robolectric environment
-    testImplementation("androidx.test:core:1.6.1")
-    // Optional -- Mockito framework
-    testImplementation("org.mockito:mockito-core:3.11.2")
-    // Optional -- mockito-kotlin
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    // Optional -- Mockk framework
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    implementation(libs.kotlinx.coroutines.android)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("loom-publish") {
+            run {
+                groupId = getLocalGroup()
+                artifactId = getLocalArtifactId()
+                version = getLocalVersion()
+                artifact("$buildDir/libs/${getLocalArtifactId()}-${getLocalVersion()}.jar")
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/nphausg/loomin")
+            credentials {
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_API_KEY")
+            }
+        }
+    }
 }

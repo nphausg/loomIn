@@ -62,67 +62,66 @@ The Loom acts as an orchestrator for state updates, focusing on two key aspects:
 
 ```kotlin
 internal class LoomImpl<T>(
-    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO),
-    private val debounceTimeMillis: Long = DEBOUNCE,
-    private val throttleTimeMillis: Long = THROTTLE,
-    private val execute: suspend (Boolean) -> T
+  private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO),
+  private val debounceTimeMillis: Long = DEBOUNCE,
+  private val throttleTimeMillis: Long = THROTTLE,
+  private val execute: suspend (Boolean) -> T
 ) : Loom<T> {
-    private val mutex = Mutex();
-    private val _modifier = MutableSharedFlow<(T) -> T>(extraBufferCapacity = 1)
-    private val _state = MutableSharedFlow<LoomSignal>(
-        replay = 0,
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
+  private val mutex = Mutex();
+  private val _modifier = MutableSharedFlow<(T) -> T>(extraBufferCapacity = 1)
+  private val _state = MutableSharedFlow<LoomSignal>(
+    replay = 0,
+    extraBufferCapacity = 1,
+    onBufferOverflow = BufferOverflow.DROP_OLDEST
+  )
+  override val state: StateFlow<LoomState<T>> = _state
+    .streamLine(debounceTimeMillis, throttleTimeMillis)
+    .onStart { emit(LoomSignal.Automatic) } // Emit the first refresh automatically
+    .flatMapLatest { event ->
+      flow {
+        emit(LoomState.Loading)
+        try {
+          val data = execute(event is LoomSignal.FromUser)
+          emit(LoomState.Loaded(data))
+        } catch (e: CancellationException) {
+          throw e
+        } catch (e: Exception) {
+          emit(LoomState.Error(e))
+        }
+      }
+    }
+    .combine(_modifier.onStart { emit { data: T -> data } }) { oldState, modifier ->
+      mutex.withLock {
+        if (oldState is LoomState.Loaded) {
+          val expectedData = modifier(oldState.data)
+          if (expectedData != oldState.data) {
+            LoomState.Loaded(expectedData)
+          } else {
+            oldState // Don't do anything if value is not changing
+          }
+        } else {
+          oldState // Don't do anything if value is not changing
+        }
+      }
+    }
+    .catch { emit(LoomState.Error(it)) }
+    .stateIn(
+      scope = scope,
+      started = SharingStarted.WhileSubscribed(
+        stopTimeoutMillis = 5_000,
+        replayExpirationMillis = 0
+      ),
+      initialValue = LoomState.Init
     )
-    override val state: StateFlow<LoomState<T>> = _state
-        .streamLine(debounceTimeMillis, throttleTimeMillis)
-        .onStart { emit(LoomSignal.Automatic) } // Emit the first refresh automatically
-        .flatMapLatest { event ->
-            flow {
-                emit(LoomState.Loading)
-                try {
-                    val data = execute(event is LoomSignal.FromUser)
-                    emit(LoomState.Loaded(data))
-                } catch (e: CancellationException) {
-                    throw e
-                } catch (e: Exception) {
-                    emit(LoomState.Error(e))
-                }
-            }
-        }
-        .combine(_modifier.onStart { emit { data: T -> data } }) { oldState, modifier ->
-            mutex.withLock {
-                if (oldState is LoomState.Loaded) {
-                    val expectedData = modifier(oldState.data)
-                    if (expectedData != oldState.data) {
-                        LoomState.Loaded(expectedData)
-                    } else {
-                        oldState // Don't do anything if value is not changing
-                    }
-                } else {
-                    oldState // Don't do anything if value is not changing
-                }
-            }
-        }
-        .catch { emit(LoomState.Error(it)) }
-        .stateIn(
-            scope = scope,
-            started = SharingStarted.WhileSubscribed(
-                stopTimeoutMillis = 5_000,
-                replayExpirationMillis = 0
-            ),
-            initialValue = LoomState.Init
-        )
 
-    override fun refresh(fromUser: Boolean) {
-        _state.tryEmit(if (fromUser) LoomSignal.FromUser else LoomSignal.Automatic)
-    }
+  override fun refresh(fromUser: Boolean) {
+    _state.tryEmit(if (fromUser) LoomSignal.FromUser else LoomSignal.Automatic)
+  }
 
-    override fun update(modifier: (T) -> T) {
-        _modifier.tryEmit(modifier)
-    }
+  override fun update(modifier: (T) -> T) {
+    _modifier.tryEmit(modifier)
+  }
 }
-
 ```
 
 #### Conclusion
@@ -130,11 +129,21 @@ The Loom metaphor emphasizes the importance of structured, efficient, and scalab
 
 ## 🚀 How to use
 
-Cloning the repository into a local directory and checkout the desired branch:
+- Step 1: Grab from Maven central at the coordinates:
 
+```groovy
+repositories {
+  google()
+  mavenCentral()
+  maven {
+    url = uri("https://maven.pkg.github.com/nphausg/loomIn")
+  }
+}
 ```
-git clone git@github.com:nphausg/loom.git
-git checkout master
+- Step 2: Implementation from your module
+```kts
+$latestVersion = "0.0.1-alpha"
+implementation("com.nphausg:loom:$latestVersion")
 ```
 
 ## 📝 Contributing
