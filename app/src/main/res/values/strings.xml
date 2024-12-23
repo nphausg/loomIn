@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">android.loom</string>
+    <string name="app_name">LoomIn</string>
+    <string name="happy_birthday_text">Happy Birthday to you!</string>
+    <string name="signature_text">From nphausg (Leo N)</string>
 </resources>

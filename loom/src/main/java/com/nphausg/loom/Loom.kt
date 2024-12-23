@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.sample
 
-
 interface Loom<T> {
     val state: StateFlow<LoomState<T>>
     fun refresh(fromUser: Boolean = false)
@@ -37,6 +36,10 @@ fun <T> Flow<T>.streamLine(
     // regular interval of updates where periodic updates are desired
     // regardless of how often new data is produced.
     .sample(throttleTimeMillis)
+
+typealias StringInt = Loom<Int>
+typealias StringLoom = Loom<String>
+typealias LoomFactory<T> = (CoroutineScope, suspend (Boolean) -> T) -> Loom<T>
 
 fun <T> loomIn(
     scope: CoroutineScope,
