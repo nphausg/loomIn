@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">LoomIn</string>
-    <string name="happy_birthday_text">Happy Birthday to you!</string>
-    <string name="signature_text">From nphausg (Leo N)</string>
+    <string name="splash_welcome_text">Nice to meet you!</string>
+    <string name="splash_signature_text">From nphausg (Leo N)</string>
 </resources>
