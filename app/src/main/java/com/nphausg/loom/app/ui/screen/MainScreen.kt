@@ -22,7 +22,7 @@ import androidx.navigation.compose.rememberNavController
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        topBar = {
+        bottomBar = {
             TabNavigationBar(navController = navController)
         },
         content = { contentPadding ->
@@ -35,7 +35,7 @@ fun MainScreen() {
                     .padding(contentPadding)
             ) {
                 composable("main") { MainTabScreen() }
-                composable("explore") { ExploreTabScreen() }
+                composable("explore") { TipCalcScreen() }
                 composable("me") { MeTabScreen() }
             }
         }
@@ -78,13 +78,6 @@ fun getSelectedTabIndex(navController: NavController): Int {
 fun MainTabScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(text = "Main Tab", fontSize = 24.sp)
-    }
-}
-
-@Composable
-fun ExploreTabScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Explore Tab", fontSize = 24.sp)
     }
 }
 

@@ -69,13 +69,16 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    implementation("com.nphausg:loom:0.0.1-alpha")
+    implementation(project(":loom"))
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.navigation.compose)
 
     // Foundation
     implementation(project(":foundation:network"))
     implementation(project(":foundation:ui"))
+
+    // Feature
+    // implementation(project(":feature:crypto"))
 
     // Test
     testImplementation(libs.junit)

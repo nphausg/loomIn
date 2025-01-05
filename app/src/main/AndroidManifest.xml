@@ -16,11 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Splash"
         tools:targetApi="31">
+
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="uiMode"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- Disable Firebase analytics by default. This setting is overwritten for the `prod` flavor -->
+        <meta-data
+            android:name="firebase_analytics_collection_deactivated"
+            android:value="true" />
+        <!-- Disable collection of AD_ID for all build variants -->
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
+        <!-- Firebase automatically adds the following property which we don't use so remove it -->
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            tools:node="remove" />
+
+    </application>
 </manifest>

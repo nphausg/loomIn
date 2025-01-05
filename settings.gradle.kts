@@ -27,6 +27,7 @@ rootProject.name = "android.loomin"
 // enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":loom")
+
 // Foundation
 include(":foundation:ui")
 include(":foundation:network")

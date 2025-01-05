@@ -51,7 +51,7 @@ dependencies {
     // Foundation
     implementation(project(":foundation:network"))
     implementation(project(":foundation:ui"))
-    implementation("com.nphausg:loom:0.0.1-alpha")
+    implementation(project(":loom"))
 
     // Test
     testImplementation(libs.junit)
