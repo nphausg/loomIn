@@ -163,7 +163,7 @@ We welcome contributions! If you're interested in contributing to LoomFlow, here
 
 ## 📄 License
 
-LoomFlow is open-source and licensed under the MIT License.
+LoomIn is open-source and licensed under the Apache-2.0 license.
 
 ## 🌍 Connect With me
 
