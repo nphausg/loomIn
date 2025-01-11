@@ -16,9 +16,9 @@
 
 ## 👇 Overview
 
-### 🎯 Why LoomFlow?
+### 🎯 Why LoomIn?
 
-LoomFlow offers a clean, easy-to-use solution for developers handling complex asynchronous workflows. It simplifies managing state-driven operations and ensures your app performs efficiently by avoiding redundant calls and state updates.
+LoomIn offers a clean, easy-to-use solution for developers handling complex asynchronous workflows. It simplifies managing state-driven operations and ensures your app performs efficiently by avoiding redundant calls and state updates.
 
  - **Integration**: A loom weaves threads into a cohesive fabric, much like how the Loom system integrates multiple data streams into a single, unified state.
 
@@ -148,7 +148,7 @@ implementation("com.nphausg:loom:$latestVersion")
 
 ## 📝 Contributing
 Contributing
-We welcome contributions! If you're interested in contributing to LoomFlow, here are some ways you can help:
+We welcome contributions! If you're interested in contributing to LoomIn, here are some ways you can help:
 - Fix bugs 🐛
 - Improve documentation 📚
 - Enhance features 💡
@@ -160,10 +160,6 @@ We welcome contributions! If you're interested in contributing to LoomFlow, here
 - Write tests for your changes (if applicable).
 - Submit a pull request with a detailed explanation of your changes.
 - Please feel free to contact me or make a pull request.
-
-## 📄 License
-
-LoomIn is open-source and licensed under the Apache-2.0 license.
 
 ## 🌍 Connect With me
 
@@ -177,7 +173,7 @@ Follow the repository for updates and improvements:
 <a href="https://revolut.me/nphausg" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="nphausg" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## 👥 Acknowledgements
-Thanks to the Kotlin and Coroutine community for their support and contributions. We also want to thank all of our contributors who helped improve LoomFlow! 🙏
+Thanks to the Kotlin and Coroutine community for their support and contributions. We also want to thank all of our contributors who helped improve LoomIn! 🙏
 
 ## ✨ Star, Fork, and Share! ✨
 

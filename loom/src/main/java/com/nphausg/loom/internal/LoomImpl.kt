@@ -63,15 +63,13 @@ internal class LoomImpl<T>(
                 try {
                     val data = execute(event is LoomSignal.FromUser)
                     emit(LoomState.Loaded(data))
-                } catch (e: CancellationException) {
-                    throw e
                 } catch (e: Exception) {
                     emit(LoomState.Error(e))
                 }
             }
         }
         .combine(_modifier.onStart { emit { data: T -> data } }) { oldState, modifier ->
-            synchronized(this@LoomImpl){
+            synchronized(this@LoomImpl) {
                 if (oldState is LoomState.Loaded) {
                     val expectedData = modifier(oldState.data)
                     if (expectedData != oldState.data) {

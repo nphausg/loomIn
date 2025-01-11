@@ -1,7 +1,7 @@
 plugins {
-    id("java-library")
     id("maven-publish")
-    kotlin("jvm")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 fun getLocalGroup() = "com.nphausg"
@@ -11,12 +11,39 @@ fun getLocalArtifactId() = "loom"
 group = getLocalGroup()
 version = getLocalVersion()
 
-java {
+android {
+    namespace = "com.nphausg.loom"
+    compileSdk = 35
+
+    defaultConfig {
+        minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        debug { }
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
 }
 
 dependencies {
     implementation(libs.kotlinx.coroutines.android)
-    implementation(kotlin("stdlib-jdk8"))
+    testImplementation(libs.bundles.unit.test)
+    testImplementation(libs.androidx.test.rules)
 }
 
 publishing {
