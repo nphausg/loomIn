@@ -47,7 +47,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes.add("/META-INF/*")
         }
     }
     testOptions {
@@ -69,7 +69,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    implementation(project(":loom"))
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.navigation.compose)
 
@@ -78,7 +77,8 @@ dependencies {
     implementation(project(":foundation:ui"))
 
     // Feature
-    // implementation(project(":feature:crypto"))
+    implementation(project(":feature:crypto"))
+    implementation(project(":loom"))
 
     // Test
     testImplementation(libs.junit)

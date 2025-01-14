@@ -37,14 +37,14 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.ui)
-    api(libs.androidx.core.ktx)
-    api(libs.androidx.ui.graphics)
-    api(libs.androidx.activity.compose)
-    api(libs.androidx.ui.tooling.preview)
-    api(libs.androidx.lifecycle.runtime.ktx)
-    api(libs.androidx.material3)
-    api(libs.androidx.compose.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.runtime)
     implementation(platform(libs.androidx.compose.bom))
     // Debug
     debugApi(libs.androidx.ui.tooling)
@@ -52,4 +52,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
 }

@@ -1,4 +1,4 @@
-package com.nphausg.loom.app.ui.vm
+package com.nphausg.loom.app.domain.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

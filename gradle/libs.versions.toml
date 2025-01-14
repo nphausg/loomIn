@@ -1,8 +1,8 @@
 [versions]
 agp = "8.8.0"
+coilCompose = "2.7.0"
 converterGson = "2.11.0"
 core = "1.6.1"
-hiltLifecycleViewmodel = "1.0.0-alpha03"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
@@ -51,6 +51,8 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+# Images
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 
 # Compose UI test
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "uiTestJunit4" }
@@ -73,7 +75,6 @@ network-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ver
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-hilt-lifecycle-viewmodel = { module = "com.google.dagger:hilt-lifecycle-viewmodel", version.ref = "hiltLifecycleViewmodel" }
 
 [bundles]
 unit-test = ["junit", "mockk", "kotlinx-coroutines-test", "androidx-test-mockito-core", "androidx-test-mockito-kotlin", "androidx-test-rules"]

@@ -41,8 +41,8 @@ dependencies {
     // UI
     implementation(libs.androidx.lifecycle.runtime.ktx)
     // Network
-    api(libs.network.converter.gson)
-    api(libs.network.retrofit)
+    implementation(libs.network.retrofit)
+    implementation(libs.network.converter.gson)
     implementation(libs.network.okhttp.logging)
     // Test
     testImplementation(libs.junit)

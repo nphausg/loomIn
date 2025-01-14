@@ -41,6 +41,9 @@ typealias StringInt = Loom<Int>
 typealias StringLoom = Loom<String>
 typealias LoomFactory<T> = (CoroutineScope, suspend (Boolean) -> T) -> Loom<T>
 
+val <T> LoomState<T>.value: T?
+    get() = (this as? LoomState.Loaded)?.data
+
 fun <T> loomIn(
     scope: CoroutineScope,
     debounceTimeMillis: Long = DEBOUNCE,

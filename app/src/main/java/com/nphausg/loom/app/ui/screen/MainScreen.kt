@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.nphausg.crypto.ui.CryptoPriceScreen
 
 @Composable
 fun MainScreen() {
@@ -29,13 +30,12 @@ fun MainScreen() {
             // Navigation graph for the three tabs
             NavHost(
                 navController = navController,
-                startDestination = "main",
+                startDestination = "explore",
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(contentPadding)
             ) {
-                composable("main") { MainTabScreen() }
-                composable("explore") { TipCalcScreen() }
+                composable("explore") { CryptoPriceScreen() }
                 composable("me") { MeTabScreen() }
             }
         }
@@ -44,7 +44,7 @@ fun MainScreen() {
 
 @Composable
 fun TabNavigationBar(navController: NavController) {
-    val tabs = listOf("Main", "Explore", "Me")
+    val tabs = listOf("Explore", "Me")
 
     TabRow(
         selectedTabIndex = getSelectedTabIndex(navController),
@@ -55,8 +55,7 @@ fun TabNavigationBar(navController: NavController) {
                 onClick = {
                     when (index) {
                         0 -> navController.navigate("main")
-                        1 -> navController.navigate("explore")
-                        2 -> navController.navigate("me")
+                        1 -> navController.navigate("me")
                     }
                 },
                 text = { Text(text = title) }
@@ -67,17 +66,9 @@ fun TabNavigationBar(navController: NavController) {
 
 fun getSelectedTabIndex(navController: NavController): Int {
     return when (navController.currentDestination?.route) {
-        "main" -> 0
-        "explore" -> 1
-        "me" -> 2
+        "explore" -> 0
+        "me" -> 1
         else -> 0
-    }
-}
-
-@Composable
-fun MainTabScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Main Tab", fontSize = 24.sp)
     }
 }
 
