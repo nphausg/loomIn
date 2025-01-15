@@ -1,4 +1,4 @@
-package com.nphausg.app.foundation.ui.theme
+package com.nphausg.foundation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

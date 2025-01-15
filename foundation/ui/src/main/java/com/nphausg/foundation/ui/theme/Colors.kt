@@ -1,4 +1,4 @@
-package com.nphausg.app.foundation.ui.theme
+package com.nphausg.foundation.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

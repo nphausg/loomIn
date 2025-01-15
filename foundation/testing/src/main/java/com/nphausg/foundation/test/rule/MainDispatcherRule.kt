@@ -1,4 +1,4 @@
-package com.nphausg.app.foundation.test.rule
+package com.nphausg.foundation.test.rule
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher

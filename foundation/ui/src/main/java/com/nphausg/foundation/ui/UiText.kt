@@ -1,4 +1,4 @@
-package com.nphausg.app.foundation.ui
+package com.nphausg.foundation.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable

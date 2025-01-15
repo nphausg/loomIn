@@ -1,4 +1,4 @@
-package com.nphausg.app.foundation.ui.utils
+package com.nphausg.foundation.ui.utils
 
 import androidx.compose.ui.tooling.preview.Preview
 

@@ -10,7 +10,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,6 +34,16 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    packaging {
+        resources {
+            excludes.add("/META-INF/*")
+        }
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 }
 

@@ -2,14 +2,15 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.nphausg.app.foundation.network"
+    namespace = "com.nphausg.foundation.network"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -38,8 +39,10 @@ android {
 }
 
 dependencies {
-    // UI
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    // DI
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     // Network
     implementation(libs.network.retrofit)
     implementation(libs.network.converter.gson)

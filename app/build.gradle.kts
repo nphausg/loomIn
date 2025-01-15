@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nphausg.loom"
-        minSdk = 24
+        minSdk = 26
         versionCode = 1
         versionName = "0.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

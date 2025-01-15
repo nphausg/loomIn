@@ -1,6 +1,6 @@
-package com.nphausg.app.foundation.test
+package com.nphausg.foundation.test
 
-import com.nphausg.app.foundation.test.rule.MainDispatcherRule
+import com.nphausg.foundation.test.rule.MainDispatcherRule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

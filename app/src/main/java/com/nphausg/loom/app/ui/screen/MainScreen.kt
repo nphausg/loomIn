@@ -54,7 +54,7 @@ fun TabNavigationBar(navController: NavController) {
                 selected = getSelectedTabIndex(navController) == index,
                 onClick = {
                     when (index) {
-                        0 -> navController.navigate("main")
+                        0 -> navController.navigate("explore")
                         1 -> navController.navigate("me")
                     }
                 },
