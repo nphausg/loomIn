@@ -7,13 +7,20 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -36,6 +43,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -54,9 +62,18 @@ import com.nphausg.loom.LoomState
 @Composable
 fun CryptoPriceScreen(viewModel: CryptoViewModel = hiltViewModel()) {
 
+    val layoutDirection = LocalLayoutDirection.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                start = WindowInsets.safeDrawing.asPaddingValues()
+                    .calculateStartPadding(layoutDirection),
+                end = WindowInsets.safeDrawing.asPaddingValues()
+                    .calculateEndPadding(layoutDirection),
+            ),
         topBar = {
             TopAppBar(
                 title = {},
@@ -126,7 +143,7 @@ private fun CryptoPriceCard(modifier: Modifier = Modifier, item: CryptoPrice) {
             .wrapContentHeight()
             .padding(8.dp)
             .then(modifier),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.5.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Row(
@@ -160,7 +177,10 @@ private fun CryptoPriceCard(modifier: Modifier = Modifier, item: CryptoPrice) {
                     color = Color.Gray
                 )
             }
-            Column(horizontalAlignment = Alignment.End) {
+            Column(
+                modifier = Modifier.padding(start = 8.dp),
+                horizontalAlignment = Alignment.End
+            ) {
                 Text(
                     text = "$${item.currentPrice}",
                     fontWeight = FontWeight.Bold,
@@ -171,9 +191,10 @@ private fun CryptoPriceCard(modifier: Modifier = Modifier, item: CryptoPrice) {
                         "+${String.format("%.2f", item.priceChangePercentage24h)}%"
                     else
                         "${String.format("%.2f", item.priceChangePercentage24h)}%",
-                    color = if (item.priceChangePercentage24h > 0) Color(0xFF4CAF50) else Color(
-                        0xFFF44336
-                    ),
+                    color = if (item.priceChangePercentage24h > 0)
+                        Color(0xFF4CAF50)
+                    else
+                        Color(0xFFF44336),
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp
                 )

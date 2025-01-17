@@ -19,6 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.nphausg.crypto.ui.CryptoPriceScreen
 import com.nphausg.loom.LoomState
 import com.nphausg.loom.app.domain.vm.MainViewModel
 import com.nphausg.loom.app.ui.screen.MainScreen
@@ -62,26 +63,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BasicTheme {
-
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        MainScreen()
-                    }
-                }
+                CryptoPriceScreen()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 }

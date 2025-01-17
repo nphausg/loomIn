@@ -31,10 +31,7 @@ fun MainScreen() {
             NavHost(
                 navController = navController,
                 startDestination = "explore",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(contentPadding)
-            ) {
+                modifier = Modifier.fillMaxSize()) {
                 composable("explore") { CryptoPriceScreen() }
                 composable("me") { MeTabScreen() }
             }
