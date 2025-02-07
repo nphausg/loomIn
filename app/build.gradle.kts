@@ -25,7 +25,7 @@ android {
 
     buildTypes {
         debug {
-
+            isMinifyEnabled = false
         }
         release {
             isMinifyEnabled = true
@@ -65,26 +65,34 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     // DI
-    implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
 
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.navigation.compose)
 
-    // Foundation
-    implementation(project(":foundation:network"))
-    implementation(project(":foundation:ui"))
-
     // Feature
-    implementation(project(":feature:crypto"))
     implementation(project(":loom"))
+
+    // Image
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(platform(libs.coil.bom))
+
+    // Network
+    implementation(libs.network.retrofit)
+    implementation(libs.network.okhttp.logging)
+    implementation(libs.network.converter.gson)
 
     // Test
     testImplementation(libs.junit)
-    implementation(project(":foundation:testing"))
 
     // UI Test
+    androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

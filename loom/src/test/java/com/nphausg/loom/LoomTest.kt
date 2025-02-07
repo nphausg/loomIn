@@ -16,14 +16,14 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class LoomTest {
+class LoomTest : BaseUnitTest() {
 
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var loom: LoomImpl<Int>
 
     @Before
-    fun setup() {
-        Dispatchers.setMain(testDispatcher)
+    override fun setUp() {
+        super.setUp()
         loom = LoomImpl(
             scope = CoroutineScope(testDispatcher),
             debounceTimeMillis = 50L,
@@ -85,10 +85,5 @@ class LoomTest {
         advanceUntilIdle()
 
         assertEquals(LoomState.Init, loom.state.value)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
     }
 }

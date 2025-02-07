@@ -1,22 +1,21 @@
 [versions]
 agp = "8.8.0"
-coilCompose = "2.7.0"
 converterGson = "2.11.0"
-core = "1.6.1"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
-mockk = "1.13.14"
+mockk = "1.13.16"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 kotlinxCoroutines = "1.10.1"
 kotlinxCoroutinesAndroid = "1.10.1"
 lifecycleRuntimeKtx = "2.8.7"
-navigationCompose = "2.8.5"
-uiTestJunit4 = "1.7.6"
-activityCompose = "1.9.3"
-composeBom = "2024.12.01"
+navigationCompose = "2.8.6"
+uiTestJunit4 = "1.7.7"
+activityCompose = "1.10.0"
+composeBom = "2025.01.01"
+coilBom = "3.0.4"
 # DI
 hilt = "2.55"
 ksp = "2.1.0-1.0.29"
@@ -27,32 +26,23 @@ okhttp = "4.12.0"
 androidxTestRules = "1.6.1"
 mockitoCore = "5.15.2"
 mockitoKotlin = "5.4.0"
-appcompat = "1.7.0"
-material = "1.12.0"
 
 [libraries]
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
-# Images
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 
 # Compose UI test
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "uiTestJunit4" }
@@ -70,6 +60,13 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 network-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 network-okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 network-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+
+# Images
+coil = { module = "io.coil-kt.coil3:coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp"}
+coil-bom = { module = "io.coil-kt.coil3:coil-bom", version.ref = "coilBom" }
+
 
 # DI
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }

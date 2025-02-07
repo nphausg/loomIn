@@ -6,7 +6,6 @@ import com.nphausg.loom.LoomSignal
 import com.nphausg.loom.LoomState
 import com.nphausg.loom.THROTTLE
 import com.nphausg.loom.streamLine
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow

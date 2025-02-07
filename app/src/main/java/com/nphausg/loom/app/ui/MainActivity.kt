@@ -5,24 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.nphausg.crypto.ui.CryptoPriceScreen
+import com.nphausg.crypto.ui.MainScreen
 import com.nphausg.loom.LoomState
+import com.nphausg.loom.app.domain.vm.MainUiState
 import com.nphausg.loom.app.domain.vm.MainViewModel
-import com.nphausg.loom.app.ui.screen.MainScreen
 import com.nphausg.loom.app.ui.theme.BasicTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,7 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Update the uiState
-        var uiState: LoomState<String> by mutableStateOf(LoomState.Loading)
+        var uiState: LoomState<MainUiState> by mutableStateOf(LoomState.Loading)
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState
@@ -63,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BasicTheme {
-                CryptoPriceScreen()
+                MainScreen()
             }
         }
     }
