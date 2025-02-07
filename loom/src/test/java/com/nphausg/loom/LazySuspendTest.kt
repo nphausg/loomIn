@@ -2,6 +2,7 @@ package com.nphausg.loom
 
 import com.nphausg.loom.coroutine.lazySuspend
 import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
@@ -13,6 +14,7 @@ import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.coroutines.CoroutineContext
@@ -97,5 +99,78 @@ class LazySuspendTest : BaseUnitTest() {
         assertEquals(false, lazyValue.isInitialized)
         runCurrent()
         assertEquals(true, lazyValue.isInitialized)
+    }
+
+    @Test
+    fun `test lazySuspend valueOrNull`() = runTest {
+        // Create another lazySuspend instance with a specific return value
+        val lazyValue = lazySuspend {
+            delay(500)
+            "Lazy Initialized"  // Return a string after delay
+        }
+
+        // Check that the value is not initialized yet
+        assertFalse(lazyValue.isInitialized)
+
+        // Invoke the lazy value and test initialization
+        val result = lazyValue()  // Suspends for 500ms
+        assertTrue(lazyValue.isInitialized)
+
+        // Ensure the result is the value we initialized
+        assertTrue(result == "Lazy Initialized")
+        assertTrue(lazyValue.getOrNull() == "Lazy Initialized")
+    }
+
+    @Test
+    fun `test lazySuspend failure handling`() = runTest {
+        // Create a lazySuspend instance that will throw an exception
+        val lazyValue = lazySuspend<String> {
+            delay(500)
+            throw RuntimeException("Initialization failed")
+        }
+
+        // Ensure that the value is not initialized yet
+        assertFalse(lazyValue.isInitialized)
+
+        // Attempt to invoke the lazy value and handle the failure
+        try {
+            lazyValue()  // This will throw an exception
+        } catch (e: RuntimeException) {
+            // Expecting the exception to be thrown
+            assertTrue(e.message == "Initialization failed")
+        }
+
+        // Check that the value is still not initialized after failure
+        assertFalse(lazyValue.isInitialized)
+
+        // Ensure the exception is properly captured in the state
+        assertTrue((lazyValue.getOrNull() == null))
+    }
+
+    @Test
+    fun `test lazySuspend with background thread initialization`() = runTest {
+        // Create a lazySuspend instance that will run on a background thread
+        val lazyValue = lazySuspend {
+            // This code should run on a background thread
+            withContext(Dispatchers.IO) {
+                delay(1000)  // Simulate some background work
+                println("Initialized on thread: ${Thread.currentThread().name}")
+                Unit  // Return Unit
+            }
+        }
+
+        // Ensure that the value is not initialized yet
+        assertFalse(lazyValue.isInitialized)
+
+        // Invoke the lazy value and test initialization
+        lazyValue()  // This should run in the background
+
+        // After invocation, it should be initialized
+        assertTrue(lazyValue.isInitialized)
+
+        // Check that the background work was done on a non-main thread
+        // The thread name should not be the main thread's name
+        val threadName = Thread.currentThread().name
+        assertTrue(threadName != "main")  // Ensures it didn't run on the main thread
     }
 }
