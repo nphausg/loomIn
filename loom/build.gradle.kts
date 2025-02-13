@@ -42,8 +42,8 @@ publishing {
         maven {
             url = uri("https://maven.pkg.github.com/nphausg/loomin")
             credentials {
-                username = System.getenv("GPR_USER")
-                password = "ghp_" + System.getenv("GPR_API_KEY")
+                username = System.getenv("GPR_USERNAME") ?: project.findProperty("gpr.user") as String?
+                password = System.getenv("GPR_TOKEN") ?: project.findProperty("gpr.token") as String?
             }
         }
     }

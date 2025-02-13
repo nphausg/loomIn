@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Build and Publish Loom
+    name: Build and Release LoomIn
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
         run: ./gradlew :loom:assemble
 
       - name: Publish Loom to GitHub Packages
-        run: ./gradlew :loom:publish
+        run: ./gradlew :loom:publish -Pgpr.user=${{ secrets.GPR_USERNAME }} -Pgpr.token=${{ secrets.GPR_USERNAME }}
         env:
-          GITHUB_USERNAME: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPR_USERNAME: ${{ secrets.GPR_USERNAME }}
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
