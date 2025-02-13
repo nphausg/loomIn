@@ -23,6 +23,12 @@ jobs:
 
       - name: Assemble Loom Library
         run: ./gradlew :loom:assemble
+      - name: Debug Secrets
+
+        run: |
+          echo "GPR_USERNAME: ${{ secrets.GPR_USERNAME }}"
+          echo "GPR_USERNAME: ${{ secrets.GPR_TOKEN }}"
+          echo "GPR_TOKEN length: ${#secrets.GPR_TOKEN}"  # Check if token is set
 
       - name: Publish Loom to GitHub Packages
         run: ./gradlew :loom:publish -Pgpr.user=${{ secrets.GPR_USERNAME }} -Pgpr.token=${{ secrets.GPR_USERNAME }}
