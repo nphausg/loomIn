@@ -1,10 +1,8 @@
 name: Release LoomIn
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish'
-        required: true
+  push:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -24,10 +22,10 @@ jobs:
           settings-path: ${{ github.workspace }}
 
       - name: Assemble Loom Library
-        run: ./gradlew :loom:assemble -Pversion=${{ github.event.inputs.version }}
+        run: ./gradlew :loom:assemble
 
       - name: Publish Loom to GitHub Packages
-        run: ./gradlew :loom:publish -Pversion=${{ github.event.inputs.version }}
+        run: ./gradlew :loom:publish
         env:
           GITHUB_USERNAME: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
