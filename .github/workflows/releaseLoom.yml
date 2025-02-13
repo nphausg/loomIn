@@ -2,7 +2,7 @@ name: Release LoomIn
 on:
   push:
     branches:
-      - develop
+      - 'releases/**'
 
 jobs:
   build:

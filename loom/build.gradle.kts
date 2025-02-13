@@ -36,7 +36,6 @@ publishing {
                  // Read version from the command-line argument (-Pversion=...)
                 version = project.findProperty("version") as String? ?: getLocalVersion()
                 artifact("$buildDir/libs/${getLocalArtifactId()}-${version}.jar")
-                artifact("$buildDir/libs/${getLocalArtifactId()}-${getLocalVersion()}.jar")
             }
         }
     }
