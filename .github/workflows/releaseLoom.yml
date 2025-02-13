@@ -2,7 +2,7 @@ name: Release LoomIn
 on:
   push:
     branches:
-      - 'releases/**'
+      - 'release/**'
 
 jobs:
   build:
@@ -29,12 +29,7 @@ jobs:
 
       - name: Assemble Loom Library
         run: ./gradlew :loom:assemble -Pversion=$VERSION
-      - name: Debug Secrets
-
-        run: |
-          echo "GPR_USERNAME: ${{ secrets.GPR_USERNAME }}"
-          echo "GPR_TOKEN: ${{ secrets.GPR_TOKEN }}"
-
+      
       - name: Publish Loom to GitHub Packages
         run: ./gradlew :loom:publish -Pversion=$VERSION -Pgpr.user=${{ secrets.GPR_USERNAME }} -Pgpr.token=${{ secrets.GPR_USERNAME }}
         env:
