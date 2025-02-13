@@ -1,3 +1,4 @@
+name: Publish LoomIn
 on:
   workflow_dispatch:
     inputs:
