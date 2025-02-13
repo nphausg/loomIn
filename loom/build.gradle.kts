@@ -5,11 +5,7 @@ plugins {
 }
 
 fun getLocalGroup() = "com.nphausg"
-fun getLocalVersion() = "0.0.2-alpha"
 fun getLocalArtifactId() = "loom"
-
-group = getLocalGroup()
-version = getLocalVersion()
 
 kotlin {
     compilerOptions {
@@ -33,8 +29,8 @@ publishing {
             run {
                 groupId = getLocalGroup()
                 artifactId = getLocalArtifactId()
-                version = getLocalVersion()
-                artifact("$buildDir/libs/${getLocalArtifactId()}-${getLocalVersion()}.jar")
+                version = project.findProperty("version") as String? ?: "0.0.1-alpha"
+                artifact("$buildDir/libs/${getLocalArtifactId()}-${version}.jar")
             }
         }
     }
@@ -42,8 +38,8 @@ publishing {
         maven {
             url = uri("https://maven.pkg.github.com/nphausg/loomin")
             credentials {
-                username = System.getenv("GPR_USER")
-                password = "ghp_" + System.getenv("GPR_API_KEY")
+                username = System.getenv("GPR_USERNAME") ?: project.findProperty("gpr.user") as String?
+                password = System.getenv("GPR_TOKEN") ?: project.findProperty("gpr.token") as String?
             }
         }
     }

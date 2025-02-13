@@ -1,7 +1,7 @@
 name: Deploy
 on:
   push:
-    branches: [ master ]
+    branches: [ "main" ]
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           ./gradlew :app:assembleRelease --no-daemon
       - name: Move files
         run: |
-          mv app/build/outputs/apk/release/app-release.apk app/build/app-release-unsigned.apk
+          mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/app-release-unsigned.apk
           mv app/build/outputs/bundle/release/app-release.aab app/build/app-release.aab
       - name: Upload AAB
         uses: actions/upload-artifact@v4

@@ -1,3 +1,3 @@
-#!/bin/bash 
-git fetch origin develop
-git rebase origin develop
+#!/bin/bash
+cd ..
+find . -name '*.apk'
