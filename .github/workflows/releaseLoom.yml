@@ -1,4 +1,4 @@
-name: Release LoomIn
+name: release-loom
 on:
   push:
     branches:

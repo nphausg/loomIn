@@ -5,11 +5,7 @@ plugins {
 }
 
 fun getLocalGroup() = "com.nphausg"
-fun getLocalVersion() = "0.0.2-alpha"
 fun getLocalArtifactId() = "loom"
-
-group = getLocalGroup()
-version = getLocalVersion()
 
 kotlin {
     compilerOptions {
@@ -33,8 +29,7 @@ publishing {
             run {
                 groupId = getLocalGroup()
                 artifactId = getLocalArtifactId()
-                 // Read version from the command-line argument (-Pversion=...)
-                version = project.findProperty("version") as String? ?: getLocalVersion()
+                version = project.findProperty("version") as String? ?: "0.0.1-alpha"
                 artifact("$buildDir/libs/${getLocalArtifactId()}-${version}.jar")
             }
         }
