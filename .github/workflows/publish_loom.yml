@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish'
+        required: true
+
+jobs:
+  build-and-publish:
+    name: Build and Publish Loom
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Assemble Loom Library
+        run: ./gradlew :loom:assemble -Pversion=${{ github.event.inputs.version }}
+
+      - name: Publish Loom to GitHub Packages
+        run: ./gradlew :loom:publish -Pversion=${{ github.event.inputs.version }}
+        env:
+          GITHUB_USERNAME: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
